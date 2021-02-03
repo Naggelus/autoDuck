@@ -46,7 +46,7 @@ do {
 			Clear-Host
 			mkdir C:\SippicomInstall
 			$ProgressPreference = 'silentlyContinue'
-			wget https://github.com/Naggelus/information_gathering_pnb/raw/master/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
+			wget https://github.com/Naggelus/autoDuck/raw/master/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
 			Expand-Archive -LiteralPath C:\SippicomInstall\Setups.zip -DestinationPath C:\SippicomInstall
 			del C:\SippicomInstall\Setups.zip
 		}
