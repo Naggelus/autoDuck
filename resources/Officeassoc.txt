@@ -1,0 +1,1 @@
+mailto, Outlook.URL.mailto.15

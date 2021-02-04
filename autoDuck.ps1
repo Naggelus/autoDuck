@@ -20,6 +20,7 @@ function Show-MainMenu {
 	3) Prepare Directory
 	4) Install Default Programs
 	5) Install Office
+	6) Set File associations
  
 "@
 }
@@ -51,6 +52,10 @@ do {
 			mkdir C:\SippicomInstall
 			$ProgressPreference = 'silentlyContinue'
 			wget https://github.com/Naggelus/autoDuck/raw/master/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
+			wget https://github.com/Naggelus/autoDuck/raw/master/resources/SetUserFTA.exe -OutFile C:\SippicomInstall\SetUserFTA.exe
+			wget https://github.com/Naggelus/autoDuck/raw/master/resources/Acroassoc.txt -OutFile %temp%\Acroassoc.txt
+			wget https://github.com/Naggelus/autoDuck/raw/master/resources/Officeassoc.txt -OutFile %temp%\Officeassoc.txt
+			wget https://github.com/Naggelus/autoDuck/raw/master/resources/VLCassoc.txt -OutFile %temp%\VLCassoc.txt
 			Expand-Archive -LiteralPath C:\SippicomInstall\Setups.zip -DestinationPath C:\SippicomInstall
 			del C:\SippicomInstall\Setups.zip
 			
@@ -62,17 +67,29 @@ do {
 			Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\7zip.msi -qn" -Wait
 			Write-Host -BackgroundColor Green -ForegroundColor White "7-Zip installation done!"
 			Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\VLC.msi -qn" -Wait
+			C:\SippicomInstall\SetUserFTA.exe %temp%\VLCassoc.txt
 			Write-Host -BackgroundColor Green -ForegroundColor White "VLC installation done!"
 			Start-Process C:\SippicomInstall\readerdc_de_xa_crd_install.exe -Wait
+			C:\SippicomInstall\SetUserFTA.exe %temp%\Acroassoc.txt
 			Write-Host -BackgroundColor Green -ForegroundColor White "Acrobat Reader installation done!"
 			Write-Host -BackgroundColor Green -ForegroundColor White "All done!"
 		}
 		'5' {
 			Clear-Host
 			Start-Process C:\SippicomInstall\OfficeSetup.exe -Wait
+			C:\SippicomInstall\SetUserFTA.exe %temp%\Officeassoc.txt
 			
 			Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "Office installation done!"
+		}
+		'6' {
+			Clear-Host
+			C:\SippicomInstall\SetUserFTA.exe %temp%\VLCassoc.txt
+			C:\SippicomInstall\SetUserFTA.exe %temp%\Acroassoc.txt
+			C:\SippicomInstall\SetUserFTA.exe %temp%\Officeassoc.txt
+			
+			Clear-Host
+			Write-Host -BackgroundColor Green -ForegroundColor White "File associations set!"
 		}
 	}
 	pause
