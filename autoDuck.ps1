@@ -60,11 +60,12 @@ do {
 		'4' {
 			Clear-Host
 			Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\7zip.msi -qn" -Wait
+			Write-Host -BackgroundColor Green -ForegroundColor White "7-Zip installation done!"
 			Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\VLC.msi -qn" -Wait
+			Write-Host -BackgroundColor Green -ForegroundColor White "VLC installation done!"
 			Start-Process C:\SippicomInstall\readerdc_de_xa_crd_install.exe -Wait
-			
-			Clear-Host
-			Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
+			Write-Host -BackgroundColor Green -ForegroundColor White "Acrobat Reader installation done!"
+			Write-Host -BackgroundColor Green -ForegroundColor White "All done!"
 		}
 		'5' {
 			Clear-Host
