@@ -53,7 +53,7 @@ do {
 		'4' {
 			Clear-Host
 			Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\7zip.msi -qn" -Wait
-			Start-Process msiexec.exe -ArgumentList "-i C:\Users\nc\Downloads\VLC.msi -qn" -Wait
+			Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\VLC.msi -qn" -Wait
 			Start-Process C:\SippicomInstall\readerdc_de_xa_crd_install.exe -Wait
 		}
 	}
