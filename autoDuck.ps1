@@ -15,10 +15,11 @@ function Show-MainMenu {
 	Write-Host @"
 
 ===== Options: =====
-	1) IPs
+	1) Show Network Information
 	2) Set Background
-	3) Prepare
-	4) Install
+	3) Prepare Directory
+	4) Install Default Programs
+	5) Install Office
  
 "@
 }
@@ -61,6 +62,13 @@ do {
 			Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\7zip.msi -qn" -Wait
 			Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\VLC.msi -qn" -Wait
 			Start-Process C:\SippicomInstall\readerdc_de_xa_crd_install.exe -Wait
+			
+			Clear-Host
+			Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
+		}
+		'5' {
+			Clear-Host
+			Start-Process C:\SippicomInstall\OfficeSetup.exe -Wait
 			
 			Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
