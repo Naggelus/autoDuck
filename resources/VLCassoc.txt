@@ -24,6 +24,3 @@
 .TS, VLC.ts.Document
 .TTS, VLC.tts.Document
 .wmv, VLC.wmv.Document
-.acrobatsecuritysettings, Applications\AcroRd32.exe
-.pdf, AcroExch.Document.DC
-.pdfxml, Applications\AcroRd32.exe
