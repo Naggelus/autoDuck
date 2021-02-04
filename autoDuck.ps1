@@ -41,6 +41,9 @@ do {
 			Add-Type -TypeDefinition "using System;`nusing System.Runtime.InteropServices;`npublic class Params`n{`n[DllImport(`"User32.dll`",CharSet=CharSet.Unicode)]`npublic static extern int SystemParametersInfo (Int32 uAction,`nInt32 uParam,`nString lpvParam,`nInt32 fuWinIni);`n}`n".ToString()
 			Invoke-WebRequest -Uri $imgURL -OutFile $env:TEMP\PSWallpaper.jpg
 			[Params]::SystemParametersInfo(0x0014, 0, "$env:TEMP\PSWallpaper.jpg", (0x01 -bor 0x02))
+			
+			Clear-Host
+			Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
 		}
 		'3' {
 			Clear-Host
@@ -49,12 +52,18 @@ do {
 			wget https://github.com/Naggelus/autoDuck/raw/master/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
 			Expand-Archive -LiteralPath C:\SippicomInstall\Setups.zip -DestinationPath C:\SippicomInstall
 			del C:\SippicomInstall\Setups.zip
+			
+			Clear-Host
+			Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
 		}
 		'4' {
 			Clear-Host
 			Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\7zip.msi -qn" -Wait
 			Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\VLC.msi -qn" -Wait
 			Start-Process C:\SippicomInstall\readerdc_de_xa_crd_install.exe -Wait
+			
+			Clear-Host
+			Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
 		}
 	}
 	pause
