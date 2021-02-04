@@ -72,7 +72,7 @@ do {
 			Start-Process C:\SippicomInstall\OfficeSetup.exe -Wait
 			
 			Clear-Host
-			Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
+			Write-Host -BackgroundColor Green -ForegroundColor White "Office installation done!"
 		}
 	}
 	pause
