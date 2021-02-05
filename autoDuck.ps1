@@ -49,7 +49,9 @@ do {
 		}
 		'3' {
 			Clear-Host
-			mkdir C:\SippicomInstall
+			if(!(Test-Path C:\SippicomInstall)) {
+				mkdir C:\SippicomInstall
+			}
 			$ProgressPreference = 'silentlyContinue'
 			wget https://github.com/Naggelus/autoDuck/raw/master/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
 			wget https://github.com/Naggelus/autoDuck/raw/master/resources/SetUserFTA.exe -OutFile C:\SippicomInstall\SetUserFTA.exe
