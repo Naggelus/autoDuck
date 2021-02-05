@@ -53,9 +53,15 @@ function Install-DefaultPrograms {
 	Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\7zip.msi -qn" -Wait
 	Write-Host -BackgroundColor Green -ForegroundColor White "7-Zip installation done!"
 	Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\VLC.msi -qn" -Wait
+	if(!(Test-Path $env:TEMP\VLCassoc.txt)) {
+		wget https://github.com/Naggelus/autoDuck/raw/master/resources/VLCassoc.txt -OutFile $env:TEMP\VLCassoc.txt
+	}
 	C:\SippicomInstall\SetUserFTA.exe $env:TEMP\VLCassoc.txt
 	Write-Host -BackgroundColor Green -ForegroundColor White "VLC installation done!"
 	Start-Process C:\SippicomInstall\readerdc_de_xa_crd_install.exe -Wait
+	if(!(Test-Path $env:TEMP\Acroassoc.txt)) {
+		wget https://github.com/Naggelus/autoDuck/raw/master/resources/Acroassoc.txt -OutFile $env:TEMP\Acroassoc.txt
+	}
 	C:\SippicomInstall\SetUserFTA.exe $env:TEMP\Acroassoc.txt
 	Write-Host -BackgroundColor Green -ForegroundColor White "Acrobat Reader installation done!"
 	Write-Host -BackgroundColor Green -ForegroundColor White "All done!"
@@ -94,7 +100,13 @@ do {
 		}
 		'5' {
 			Clear-Host
+			if(!(Test-Path C:\SippicomInstall\OfficeSetup.exe)) {
+				Download-Resources
+			}
 			Start-Process C:\SippicomInstall\OfficeSetup.exe -Wait
+			if(!(Test-Path $env:TEMP\VLCassoc.txt)) {
+				wget https://github.com/Naggelus/autoDuck/raw/master/resources/Officeassoc.txt -OutFile $env:TEMP\Officeassoc.txt
+			}
 			C:\SippicomInstall\SetUserFTA.exe $env:TEMP\Officeassoc.txt
 			
 			Clear-Host
