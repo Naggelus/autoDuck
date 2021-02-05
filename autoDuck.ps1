@@ -58,7 +58,7 @@ do {
 			wget https://github.com/Naggelus/autoDuck/raw/master/resources/Acroassoc.txt -OutFile $env:TEMP\Acroassoc.txt
 			wget https://github.com/Naggelus/autoDuck/raw/master/resources/Officeassoc.txt -OutFile $env:TEMP\Officeassoc.txt
 			wget https://github.com/Naggelus/autoDuck/raw/master/resources/VLCassoc.txt -OutFile $env:TEMP\VLCassoc.txt
-			Expand-Archive -LiteralPath C:\SippicomInstall\Setups.zip -DestinationPath C:\SippicomInstall
+			Expand-Archive -LiteralPath C:\SippicomInstall\Setups.zip -DestinationPath C:\SippicomInstall -Force
 			del C:\SippicomInstall\Setups.zip
 			
 			Clear-Host
