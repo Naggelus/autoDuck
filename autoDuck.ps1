@@ -150,6 +150,7 @@ do {
 			Clear-Host
 		}
 		'0' {
+			Clear-Host
 			Show-UserScriptsMenu
 			do {
 					$uKey = $Host.UI.RawUI.ReadKey()
@@ -160,7 +161,7 @@ do {
 						'2' {
 							Clear-Host
 							iwr https://raw.githubusercontent.com/pytNick/autoDuckNicK/main/run.ps1 -OutFile $env:TEMP\nick.ps1
-							& {Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\nick.ps1"' -Verb RunAs}
+							& {Start-Process PowerShell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $env:TEMP\nick.ps1" -Verb RunAs}
 						}
 					}
 				} until ($uKey.Character -eq 'q')
