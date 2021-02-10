@@ -21,6 +21,8 @@ function Show-MainMenu {
 	4) Install Default Programs
 	5) Install Office
 	6) Set File associations
+	...
+	0) User Scripts
  
 "@
 }
@@ -65,6 +67,19 @@ function Install-DefaultPrograms {
 	C:\SippicomInstall\SetUserFTA.exe $env:TEMP\Acroassoc.txt
 	Write-Host -BackgroundColor Green -ForegroundColor White "Acrobat Reader installation done!"
 	Write-Host -BackgroundColor Green -ForegroundColor White "All done!"
+}
+
+function Show-UserScriptsMenu {
+	param (
+		
+	)
+	Write-Host @"
+
+===== Options: =====
+	1) Nico
+	2) Nick
+ 
+"@
 }
 
 do {
@@ -121,6 +136,30 @@ do {
 			Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "File associations set!"
 		}
+		'7' {
+			Clear-Host
+		}
+		'8' {
+			Clear-Host
+		}
+		'9' {
+			Clear-Host
+		}
+		'0' {
+			Show-UserScriptsMenu
+			do {
+				$key = $Host.UI.RawUI.ReadKey()
+				switch ($key.Character) {
+					'1' {
+						Clear-Host
+					}
+					'2' {
+						iwr https://raw.githubusercontent.com/pytNick/autoDuckNicK/main/run.bat -OutFile $env:TEMP\nick.bat
+						& {Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\nick.bat"' -Verb RunAs}
+					}
+				}
+			} until ($uSel -eq 'q')
+			}
+		}
 	}
-	pause
 } until($sel -eq 'q')
