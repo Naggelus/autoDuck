@@ -108,6 +108,7 @@ do {
 			Download-Resources
 		}
 		'4' {
+			Clear-Host
 			if(!(Test-Path C:\SippicomInstall\7zip.msi) -Or !(Test-Path C:\SippicomInstall\VLC.msi) -Or !(Test-Path C:\SippicomInstall\readerdc_de_xa_crd_install.exe)) {
 				Download-Resources
 			}
