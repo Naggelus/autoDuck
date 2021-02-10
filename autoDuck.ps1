@@ -8,7 +8,7 @@ function Show-MainMenu {
 	Write-Host -NoNewLine -ForegroundColor Yellow 'Computername: '
 	Write-Host $env:COMPUTERNAME
 	Write-Host -NoNewLine -ForegroundColor Yellow 'Windows Edition: '
-	gwmi win32_operatingsystem | % caption
+	Get-WmiObject win32_operatingsystem | ForEach-Object caption
 	Write-Host -NoNewLine -ForegroundColor Yellow 'Windows Version: '
 	(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').ReleaseId
 	
@@ -38,13 +38,13 @@ function Download-Resources {
 		mkdir C:\SippicomInstall
 	}
 	$ProgressPreference = 'silentlyContinue'
-	wget https://github.com/Naggelus/autoDuck/raw/master/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
-	wget https://github.com/Naggelus/autoDuck/raw/master/resources/SetUserFTA.exe -OutFile C:\SippicomInstall\SetUserFTA.exe
-	wget https://github.com/Naggelus/autoDuck/raw/master/resources/Acroassoc.txt -OutFile $env:TEMP\Acroassoc.txt
-	wget https://github.com/Naggelus/autoDuck/raw/master/resources/Officeassoc.txt -OutFile $env:TEMP\Officeassoc.txt
-	wget https://github.com/Naggelus/autoDuck/raw/master/resources/VLCassoc.txt -OutFile $env:TEMP\VLCassoc.txt
+	Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
+	Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/SetUserFTA.exe -OutFile C:\SippicomInstall\SetUserFTA.exe
+	Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/Acroassoc.txt -OutFile $env:TEMP\Acroassoc.txt
+	Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/Officeassoc.txt -OutFile $env:TEMP\Officeassoc.txt
+	Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/VLCassoc.txt -OutFile $env:TEMP\VLCassoc.txt
 	Expand-Archive -LiteralPath C:\SippicomInstall\Setups.zip -DestinationPath C:\SippicomInstall -Force
-	del C:\SippicomInstall\Setups.zip
+	Remove-Item C:\SippicomInstall\Setups.zip
 	
 	Clear-Host
 	Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
@@ -58,13 +58,13 @@ function Install-DefaultPrograms {
 	Write-Host -BackgroundColor Green -ForegroundColor White "7-Zip installation done!"
 	Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\VLC.msi -qn" -Wait
 	if(!(Test-Path $env:TEMP\VLCassoc.txt)) {
-		wget https://github.com/Naggelus/autoDuck/raw/master/resources/VLCassoc.txt -OutFile $env:TEMP\VLCassoc.txt
+		Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/VLCassoc.txt -OutFile $env:TEMP\VLCassoc.txt
 	}
 	C:\SippicomInstall\SetUserFTA.exe $env:TEMP\VLCassoc.txt
 	Write-Host -BackgroundColor Green -ForegroundColor White "VLC installation done!"
 	Start-Process C:\SippicomInstall\readerdc_de_xa_crd_install.exe -Wait
 	if(!(Test-Path $env:TEMP\Acroassoc.txt)) {
-		wget https://github.com/Naggelus/autoDuck/raw/master/resources/Acroassoc.txt -OutFile $env:TEMP\Acroassoc.txt
+		Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/Acroassoc.txt -OutFile $env:TEMP\Acroassoc.txt
 	}
 	C:\SippicomInstall\SetUserFTA.exe $env:TEMP\Acroassoc.txt
 	Write-Host -BackgroundColor Green -ForegroundColor White "Acrobat Reader installation done!"
@@ -92,8 +92,8 @@ do {
 		'1' {
 			Clear-Host
 			Get-NetIPConfiguration |
-			where {$_.InterfaceAlias -notlike '*Bluetooth*' -and $_.InterfaceAlias -notlike '*Virtual*' } |
-			select @{Name='<==================';Expression={}},@{Name='Interface';Expression={$_.InterfaceAlias}},@{Name='IP';Expression={$_.IPv4Address}},@{Name='Gateway';Expression={$_.IPv4DefaultGateway.NextHop}},@{Name='DNS';Expression={$_.DNSServer.ServerAddresses}},@{Name='==================>';Expression={}}
+			Where-Object {$_.InterfaceAlias -notlike '*Bluetooth*' -and $_.InterfaceAlias -notlike '*Virtual*' } |
+			Select-Object @{Name='<==================';Expression={}},@{Name='Interface';Expression={$_.InterfaceAlias}},@{Name='IP';Expression={$_.IPv4Address}},@{Name='Gateway';Expression={$_.IPv4DefaultGateway.NextHop}},@{Name='DNS';Expression={$_.DNSServer.ServerAddresses}},@{Name='==================>';Expression={}}
 		}
 		'2' {
 			Clear-Host
@@ -124,7 +124,7 @@ do {
 			}
 			Start-Process C:\SippicomInstall\OfficeSetup.exe -Wait
 			if(!(Test-Path $env:TEMP\VLCassoc.txt)) {
-				wget https://github.com/Naggelus/autoDuck/raw/master/resources/Officeassoc.txt -OutFile $env:TEMP\Officeassoc.txt
+				Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/Officeassoc.txt -OutFile $env:TEMP\Officeassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe $env:TEMP\Officeassoc.txt
 			
@@ -160,7 +160,7 @@ do {
 						}
 						'2' {
 							Clear-Host
-							iwr https://raw.githubusercontent.com/pytNick/autoDuckNicK/main/run.ps1 -OutFile $env:TEMP\nick.ps1
+							Invoke-WebRequest https://raw.githubusercontent.com/pytNick/autoDuckNicK/main/run.ps1 -OutFile $env:TEMP\nick.ps1
 							& {Start-Process PowerShell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $env:TEMP\nick.ps1" -Verb RunAs}
 						}
 					}
