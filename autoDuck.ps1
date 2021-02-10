@@ -23,6 +23,8 @@ function Show-MainMenu {
 	6) Set File associations
 	...
 	0) User Scripts
+	...
+	q) Quit
  
 "@
 }
@@ -78,7 +80,8 @@ function Show-UserScriptsMenu {
 ===== Options: =====
 	1) Nico
 	2) Nick
- 
+	...
+	q) Quit
 "@
 }
 
@@ -149,18 +152,19 @@ do {
 		'0' {
 			Show-UserScriptsMenu
 			do {
-				$uKey = $Host.UI.RawUI.ReadKey()
-				switch ($uKey.Character) {
-					'1' {
-						Clear-Host
+					$uKey = $Host.UI.RawUI.ReadKey()
+					switch ($uKey.Character) {
+						'1' {
+							Clear-Host
+						}
+						'2' {
+							Clear-Host
+							iwr https://raw.githubusercontent.com/pytNick/autoDuckNicK/main/run.ps1 -OutFile $env:TEMP\nick.ps1
+							& {Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\nick.ps1"' -Verb RunAs}
+						}
 					}
-					'2' {
-						iwr https://raw.githubusercontent.com/pytNick/autoDuckNicK/main/run.ps1 -OutFile $env:TEMP\nick.ps1
-						& {Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\nick.ps1"' -Verb RunAs}
-					}
-				}
-			} until ($uSel -eq 'q')
+				} until ($uKey.Character -eq 'q')
 			}
 		}
 		pause
-} until($sel -eq 'q')
+} until($key.Character -eq 'q')
