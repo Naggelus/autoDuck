@@ -161,5 +161,4 @@ do {
 			} until ($uSel -eq 'q')
 			}
 		}
-	}
 } until($sel -eq 'q')
