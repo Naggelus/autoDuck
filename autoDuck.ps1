@@ -155,8 +155,8 @@ do {
 						Clear-Host
 					}
 					'2' {
-						iwr https://raw.githubusercontent.com/pytNick/autoDuckNicK/main/run.bat -OutFile $env:TEMP\nick.bat
-						& {Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\nick.bat"' -Verb RunAs}
+						iwr https://raw.githubusercontent.com/pytNick/autoDuckNicK/main/run.ps1 -OutFile $env:TEMP\nick.ps1
+						& {Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\nick.ps1"' -Verb RunAs}
 					}
 				}
 			} until ($uSel -eq 'q')
