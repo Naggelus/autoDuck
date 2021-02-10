@@ -148,8 +148,8 @@ do {
 		'0' {
 			Show-UserScriptsMenu
 			do {
-				$key = $Host.UI.RawUI.ReadKey()
-				switch ($key.Character) {
+				$uKey = $Host.UI.RawUI.ReadKey()
+				switch ($uKey.Character) {
 					'1' {
 						Clear-Host
 					}
@@ -161,4 +161,5 @@ do {
 			} until ($uSel -eq 'q')
 			}
 		}
+		pause
 } until($sel -eq 'q')
