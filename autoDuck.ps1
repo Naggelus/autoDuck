@@ -136,6 +136,9 @@ do {
 		}
 		'6' {
 			Clear-Host
+			if(!(Test-Path C:\SippicomInstall\assoc)) {
+				mkdir C:\SippicomInstall\assoc
+			}
 			if(!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
 				Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
 			}
