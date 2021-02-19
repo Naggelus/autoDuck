@@ -126,7 +126,7 @@ do {
 				Download-Resources
 			}
 			Start-Process C:\SippicomInstall\OfficeSetup.exe -Wait
-			if(!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
+			if(!(Test-Path C:\SippicomInstall\assoc\Officeassoc.txt)) {
 				Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Officeassoc.txt
@@ -136,8 +136,17 @@ do {
 		}
 		'6' {
 			Clear-Host
+			if(!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
+				Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
+			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\VLCassoc.txt
+			if(!(Test-Path C:\SippicomInstall\assoc\Acroassoc.txt)) {
+				Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
+			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Acroassoc.txt
+			if(!(Test-Path C:\SippicomInstall\assoc\Officeassoc.txt)) {
+				Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
+			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Officeassoc.txt
 			
 			Clear-Host
