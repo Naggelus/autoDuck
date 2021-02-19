@@ -152,6 +152,21 @@ do {
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Officeassoc.txt
 			
+			Write-Host "Do you want to make these the default file associations for every user on this device? (y/n)"
+			$qKey = $Host.UI.RawUI.ReadKey()
+			switch ($qKey.Character) {
+				'y' {
+					if(!(Test-Path C:\SippicomInstall\assoc\assoc.bat)) {
+						Invoke-WebRequest https://github.com/Naggelus/autoDuck/raw/master/resources/assoc.bat -OutFile C:\SippicomInstall\assoc\assoc.bat
+					}
+					Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name '!SetAssociations' -Value "C:\SippicomInstall\assoc\assoc.bat"
+					Break;
+				}
+				'n' {
+					Break;
+				}
+			}
+
 			Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "File associations set!"
 		}
